@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nmai/tetronimo#readme",
   "dependencies": {
-    "array2d": "0.0.5"
+    "array2d": "0.0.5",
+    "paper": "^0.9.25"
   }
 }
