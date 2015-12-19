@@ -1,69 +1,59 @@
 'use strict'
 
-let Array2D =  require('array2d')
-
 let grid = Array2D.build(10, 20, 0)
+let canvas = document.getElementById('grid-canvas')
 
-console.log(grid)
+let testGrid = [ 
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ],
+  [ 0, 0, 1, 1, 0, 0, 1, 0, 0, 0 ],
+  [ 0, 0, 1, 0, 1, 0, 1, 0, 0, 0 ],
+  [ 0, 0, 1, 0, 0, 1, 1, 0, 0, 0 ],
+  [ 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] ]
 
-let COLOR = {
-  0: 'none',
-  1: 'red',
-  2: 'blue',
-  3: 'green'
+function flipBits () {
+  testGrid = Array2D.rpan(testGrid)
 }
 
-let PIECE = {  
-  I: [ [0,0,0,0],
-       [1,1,1,1],
-       [0,0,0,0],
-       [0,0,0,0]
-     ],
+// side length of squares
+const s = 10
 
-  L: [ [0,0,1],
-       [1,1,1],
-       [0,0,0]
-     ],
+let ctx = canvas.getContext('2d')
 
-  J: [ [1,0,0],
-       [1,1,1],
-       [0,0,0]
-     ],
+function draw () {
 
-  S: [ [1,1,0],
-       [0,1,1],
-       [0,0,0]
-     ],
+  Array2D.eachCell(testGrid, (cell, i, j) => {
+    if (cell === 0) {
+      ctx.clearRect( j * s, i * s, s, s)
+    } else {
+      ctx.fillRect( j * s, i * s, s, s)
+    }
+  })
 
-  Z: [ [0,1,1],
-       [1,1,0],
-       [0,0,0]
-     ],
+  // ctx.clearRect(45,45,60,60)
+  // ctx.strokeRect(60,60,100,100)
 
-  O: [ [1,1],
-       [1,1]
-     ],
-
-  T: [ [0,1,0],
-       [1,1,1],
-       [0,0,0] 
-     ]
+  requestAnimationFrame(draw)
 }
 
-let def = function () {
-  this.x = 1
-  this.y = 2
-}
+draw()
 
-let a = new def()
-
-a.x = 3
-
-let b = new def()
-
-b.x = 4
-
-console.log(a.x + ' ' + b.x)
+// start flipping bits independently of the draw loop:
+setInterval(flipBits, 500)
 
 /*
 debounce step only if collision in next frame
