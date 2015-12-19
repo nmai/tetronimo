@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<script src="paper.js" type="text/javascript"></script>
+
+<canvas id="grid-canvas" width="500px" height="600px"></canvas>
+
+<script>
+
+var COLORS = {
+  0: 'none',
+  1: 'black',
+  2: 'blue',
+  3: 'green'
+}
+
+var P = paper.setup(document.getElementById('grid-canvas'))
+
+var script = function () {
+  console.log(this)
+
+  var grid = [ 
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 ],
+    [ 0, 0, 2, 1, 0, 0, 2, 0, 0, 0 ],
+    [ 0, 0, 2, 0, 1, 0, 2, 0, 0, 0 ],
+    [ 0, 0, 2, 0, 0, 1, 2, 0, 0, 0 ],
+    [ 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] ]
+
+  for (var i = 0; i < grid.length; i++) {
+      for (var j = 0; j < grid[0].length; j++) {
+          var color = 'white'
+          var cell = grid[i][j]
+          if (cell > 0)
+              color = COLORS[cell]
+          
+          new Path.Rectangle({
+            point: [j * 10, i * 10],
+            size: [10, 10],
+            fillColor: color
+          })
+      }
+  }
+
+  var count = 0
+
+  view.onFrame = function (event) {
+    for (var i = 0; i < grid.length; i++) {
+      for (var j = 0; j < grid[0].length; j++) {
+          var color = 'white'
+          var cell = grid[i][j]
+          if (cell > 0)
+              color = COLORS[cell]
+          
+          var x = new Path.Rectangle({
+            point: [j * 10, i * 10],
+            size: [10, 10],
+            fillColor: color
+          })
+      }
+    }
+  }
+}
+
+// var s = script.bind(P)
+
+P.install(window)
+
+script()
+
+</script>
