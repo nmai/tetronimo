@@ -5,12 +5,15 @@
 #grid-canvas {
   margin: auto;
   display: block;
+  border: 1px solid black;
 }
 </style>
 
-<canvas id="grid-canvas" width="500px" height="600px"></canvas>
+<canvas id="test-canvas" width="200px" height="400px"></canvas>
+<canvas id="grid-canvas" width="200px" height="400px"></canvas>
 
 <!-- make sure we load up dependencies in correct order -->
 <!-- because whats a dependency manager?                -->
+<script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="defs.js"></script>
 <script type="text/javascript" src="tetronimo.js"></script>
