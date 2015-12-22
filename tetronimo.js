@@ -9,9 +9,20 @@ function flipBits () {
 }
 
 // side length of squares
-const s = 10
+const s = 20
 
-let ctx = canvas.getContext('2d')
+const ctx = canvas.getContext('2d')
+
+// generate a set of pieces
+let currentSet = shuffle(Object.keys(PIECES)).map((id) => {return PIECES[id]})
+let currentPiece = currentSet[0]
+
+function randomPiece () {
+  return currentSet[Math.floor(Math.random() * currentSet.length)]
+}
+
+let posX = 4
+let posY = 4
 
 function draw () {
 
@@ -19,7 +30,15 @@ function draw () {
     if (cell === 0) {
       ctx.clearRect( j * s, i * s, s, s)
     } else {
+      ctx.fillStyle = COLORS[cell]
       ctx.fillRect( j * s, i * s, s, s)
+    }
+  })
+
+  Array2D.eachCell(currentPiece, (cell, i, j) => {
+    if (cell !== 0) {
+      ctx.fillStyle = COLORS[cell]
+      ctx.fillRect( (j + posX) * s, (i + posY) * s, s, s)
     }
   })
 
@@ -33,6 +52,7 @@ draw()
 
 // start flipping bits independently of the draw loop:
 setInterval(flipBits, 500)
+
 
 /*
 debounce step only if collision in next frame
